@@ -415,42 +415,57 @@ function buildCard(game){
       const canEdit=isMine&&!locked;
 
       const tr=document.createElement('div');tr.className='tip-row';
-      tr.innerHTML=`
-        <div class="tip-who">
-          <div class="tdot" style="background:${p.color}"></div>
-          <span class="tname">${p.name}</span>
-        </div>
-        <div class="tip-fields">
-          <input class="tip-input${isMine?' mine':''}" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="2"
-            value="${t.h!==null&&t.h!==undefined?t.h:''}" placeholder="-"
-            id="tip-${p.id}-${game.id}-h"
-            ${!canEdit?'readonly':''}
-            style="${!canEdit?'opacity:0.35;pointer-events:none;':''}"
-          >
-          <span class="tsep">:</span>
-          <input class="tip-input${isMine?' mine':''}" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="2"
-            value="${t.a!==null&&t.a!==undefined?t.a:''}" placeholder="-"
-            id="tip-${p.id}-${game.id}-a"
-            ${!canEdit?'readonly':''}
-            style="${!canEdit?'opacity:0.35;pointer-events:none;':''}"
-          >
-        </div>
-        ${ptsHtml}
-        ${locked&&isMine?'<span class="lock-icon">🔒</span>':''}`;
+      const hVal=t.h!==null&&t.h!==undefined?t.h:'';
+      const aVal=t.a!==null&&t.a!==undefined?t.a:'';
+
+      const whoDiv=document.createElement('div');whoDiv.className='tip-who';
+      whoDiv.innerHTML=`<div class="tdot" style="background:${p.color}"></div><span class="tname">${p.name}</span>`;
+      tr.appendChild(whoDiv);
+
+      const fieldsDiv=document.createElement('div');fieldsDiv.className='tip-fields';
 
       if(canEdit){
-        let tipTimer=null;
-        tr.querySelectorAll('.tip-input').forEach(inp=>{
-          inp.addEventListener('input',()=>{
-            clearTimeout(tipTimer);
-            tipTimer=setTimeout(()=>saveTip(p.id,game.id),800);
-          });
-          inp.addEventListener('blur',()=>{
-            clearTimeout(tipTimer);
-            saveTip(p.id,game.id);
-          });
-        });
+        const hInp=document.createElement('input');
+        hInp.className='tip-input mine';hInp.type='tel';hInp.inputMode='numeric';
+        hInp.maxLength=2;hInp.value=hVal;hInp.placeholder='-';
+        hInp.id='tip-'+p.id+'-'+game.id+'-h';
+
+        const sep=document.createElement('span');sep.className='tsep';sep.textContent=':';
+
+        const aInp=document.createElement('input');
+        aInp.className='tip-input mine';aInp.type='tel';aInp.inputMode='numeric';
+        aInp.maxLength=2;aInp.value=aVal;aInp.placeholder='-';
+        aInp.id='tip-'+p.id+'-'+game.id+'-a';
+
+        const saveBtn=document.createElement('button');
+        saveBtn.textContent='✓';
+        saveBtn.style.cssText='background:var(--accent);border:none;border-radius:6px;color:#fff;font-size:13px;font-weight:700;padding:4px 8px;cursor:pointer;margin-left:4px;flex-shrink:0;';
+        saveBtn.onclick=()=>{
+          const hv=String(hInp.value).trim();
+          const av=String(aInp.value).trim();
+          const h=hv===''?null:parseInt(hv,10);
+          const a=av===''?null:parseInt(av,10);
+          if(!tips[p.id])tips[p.id]={};
+          tips[p.id][game.id]={h,a};
+          setSyncing('s');
+          api.post('/wm_tips',{player_id:p.id,game_id:game.id,home_score:h,away_score:a},{headers:{'Prefer':'resolution=merge-duplicates,return=minimal'}})
+            .then(()=>{setSyncing('ok');saveBtn.textContent='✓';saveBtn.style.background='var(--green)';saveBtn.style.color='#000';setTimeout(()=>{saveBtn.textContent='✓';saveBtn.style.background='var(--accent)';saveBtn.style.color='#fff';},1000);})
+            .catch(()=>{setSyncing('ok');showToast('Fehler');});
+        };
+
+        fieldsDiv.appendChild(hInp);fieldsDiv.appendChild(sep);fieldsDiv.appendChild(aInp);
+        tr.appendChild(fieldsDiv);
+        tr.appendChild(saveBtn);
+      } else {
+        fieldsDiv.innerHTML=`
+          <span style="display:inline-block;width:36px;height:32px;line-height:32px;text-align:center;background:var(--surface2);border-radius:6px;font-size:14px;font-weight:700;opacity:0.5">${hVal!==''?hVal:'-'}</span>
+          <span class="tsep">:</span>
+          <span style="display:inline-block;width:36px;height:32px;line-height:32px;text-align:center;background:var(--surface2);border-radius:6px;font-size:14px;font-weight:700;opacity:0.5">${aVal!==''?aVal:'-'}</span>`;
+        tr.appendChild(fieldsDiv);
       }
+
+      if(ptsHtml){const pDiv=document.createElement('span');pDiv.innerHTML=ptsHtml;tr.appendChild(pDiv);}
+      if(locked&&isMine){const lk=document.createElement('span');lk.className='lock-icon';lk.textContent='🔒';tr.appendChild(lk);}
       tipsDiv.appendChild(tr);
     });
     card.appendChild(tipsDiv);
