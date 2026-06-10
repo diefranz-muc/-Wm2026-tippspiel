@@ -426,36 +426,50 @@ function buildCard(game){
 
       if(canEdit){
         const hInp=document.createElement('input');
-        hInp.className='tip-input mine';hInp.type='tel';hInp.inputMode='numeric';
-        hInp.maxLength=2;hInp.value=hVal;hInp.placeholder='-';
+        hInp.className='tip-input mine';hInp.type='number';
+        hInp.min=0;hInp.max=99;
+        hInp.value=hVal;hInp.placeholder='-';
         hInp.id='tip-'+p.id+'-'+game.id+'-h';
+        hInp.setAttribute('inputmode','decimal');
 
         const sep=document.createElement('span');sep.className='tsep';sep.textContent=':';
 
         const aInp=document.createElement('input');
-        aInp.className='tip-input mine';aInp.type='tel';aInp.inputMode='numeric';
-        aInp.maxLength=2;aInp.value=aVal;aInp.placeholder='-';
+        aInp.className='tip-input mine';aInp.type='number';
+        aInp.min=0;aInp.max=99;
+        aInp.value=aVal;aInp.placeholder='-';
         aInp.id='tip-'+p.id+'-'+game.id+'-a';
+        aInp.setAttribute('inputmode','decimal');
 
-        const saveBtn=document.createElement('button');
-        saveBtn.textContent='✓';
-        saveBtn.style.cssText='background:var(--accent);border:none;border-radius:6px;color:#fff;font-size:13px;font-weight:700;padding:4px 8px;cursor:pointer;margin-left:4px;flex-shrink:0;';
-        saveBtn.onclick=()=>{
-          const hv=String(hInp.value).trim();
-          const av=String(aInp.value).trim();
-          const h=hv===''?null:parseInt(hv,10);
-          const a=av===''?null:parseInt(av,10);
+        function doSave(){
+          const hv=document.getElementById('tip-'+p.id+'-'+game.id+'-h').value;
+          const av=document.getElementById('tip-'+p.id+'-'+game.id+'-a').value;
+          const h=hv===''||hv===null?null:parseInt(hv,10);
+          const a=av===''||av===null?null:parseInt(av,10);
           if(!tips[p.id])tips[p.id]={};
           tips[p.id][game.id]={h,a};
           setSyncing('s');
           api.post('/wm_tips',{player_id:p.id,game_id:game.id,home_score:h,away_score:a},{headers:{'Prefer':'resolution=merge-duplicates,return=minimal'}})
-            .then(()=>{setSyncing('ok');saveBtn.textContent='✓';saveBtn.style.background='var(--green)';saveBtn.style.color='#000';setTimeout(()=>{saveBtn.textContent='✓';saveBtn.style.background='var(--accent)';saveBtn.style.color='#fff';},1000);})
-            .catch(()=>{setSyncing('ok');showToast('Fehler');});
-        };
+            .then(()=>{setSyncing('ok');showToast('✓ gespeichert');})
+            .catch(()=>{setSyncing('ok');showToast('Fehler – nochmal versuchen');});
+        }
+
+        // Save on every possible exit from keyboard
+        [hInp,aInp].forEach(inp=>{
+          inp.addEventListener('blur',doSave);
+          inp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.keyCode===13){inp.blur();}});
+        });
+        // Also save when aInp gets a value (covers iOS Done button)
+        aInp.addEventListener('input',()=>{
+          clearTimeout(aInp._t);
+          aInp._t=setTimeout(doSave,1500);
+        });
+        hInp.addEventListener('input',()=>{
+          clearTimeout(hInp._t);
+          hInp._t=setTimeout(doSave,1500);
+        });
 
         fieldsDiv.appendChild(hInp);fieldsDiv.appendChild(sep);fieldsDiv.appendChild(aInp);
-        tr.appendChild(fieldsDiv);
-        tr.appendChild(saveBtn);
       } else {
         fieldsDiv.innerHTML=`
           <span style="display:inline-block;width:36px;height:32px;line-height:32px;text-align:center;background:var(--surface2);border-radius:6px;font-size:14px;font-weight:700;opacity:0.5">${hVal!==''?hVal:'-'}</span>
