@@ -6,41 +6,32 @@
 <title>WM 2026 Tippspiel 🧚‍♀️</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
-:root{
-  --bg:#1a0a1e;--card:#260d2e;--card2:#320d3a;--border:#5a1a6a;
-  --pink:#ff2d8a;--pink2:#ff6eb4;--text:#ffe6f5;--muted:#c084a0;
-  --green:#4caf7d;--ard:#003f8a;--zdf:#e2001a;--mag:#e20074;--grey:#5a4a6a;
-}
+:root{--bg:#1a0a1e;--card:#260d2e;--card2:#320d3a;--border:#5a1a6a;--pink:#ff2d8a;--pink2:#ff6eb4;--text:#ffe6f5;--muted:#c084a0;--green:#4caf7d;--ard:#003f8a;--zdf:#e2001a;--mag:#e20074;--grey:#5a4a6a;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
-
 header{background:linear-gradient(135deg,#1a0a1e,#3d0050,#1a0a1e);border-bottom:2px solid var(--pink);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}
 .htitle{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;text-shadow:0 0 20px rgba(255,45,138,.5);}
 .htitle b{color:var(--pink);}
 .hmeta{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
 #sync{font-size:10px;color:var(--muted);}
-
 .topbar{background:rgba(38,13,46,.97);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.chip{display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;cursor:pointer;user-select:none;transition:all .15s;}
+.chip{display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;cursor:pointer;user-select:none;}
 .chip.active{border-color:var(--pink);background:rgba(255,45,138,.2);box-shadow:0 0 10px rgba(255,45,138,.3);}
 .chip .dot{width:8px;height:8px;border-radius:50%;}
 .btn-join{background:none;border:1px dashed var(--border);border-radius:20px;padding:5px 12px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;}
 .btn-rank{margin-left:auto;background:linear-gradient(135deg,var(--pink),#c0006a);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;}
-
 main{padding:14px 16px;}
 .ph{font-family:'Playfair Display',serif;font-size:1rem;color:var(--pink2);margin:20px 0 8px;display:flex;align-items:center;gap:8px;}
 .ph::before{content:'🧚‍♀️';}
 .ph::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);}
 .grid{display:grid;gap:8px;}
-
-/* CARD */
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .card.de{border-color:var(--pink2);}
 .ctop{display:grid;grid-template-columns:65px 1fr 90px 1fr 58px;border-bottom:1px solid var(--border);}
 .cdate{padding:8px;text-align:center;border-right:1px solid var(--border);}
 .cdate .d{font-size:9px;color:var(--muted);text-transform:uppercase;}
 .cdate .t{font-weight:700;font-size:13px;}
-.cteam{padding:8px 8px;display:flex;align-items:center;gap:5px;min-width:0;}
+.cteam{padding:8px;display:flex;align-items:center;gap:5px;min-width:0;}
 .cteam.r{flex-direction:row-reverse;}
 .cf{font-size:17px;flex-shrink:0;}
 .cn{font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -52,32 +43,27 @@ main{padding:14px 16px;}
 .ssep{color:var(--muted);font-size:12px;font-weight:700;}
 .ctv{padding:4px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
 .tvb{font-size:8px;font-weight:700;padding:2px 4px;border-radius:3px;text-transform:uppercase;white-space:nowrap;}
-.tv-ard{background:var(--ard);color:#fff;}
-.tv-zdf{background:var(--zdf);color:#fff;}
-.tv-mag{background:var(--mag);color:#fff;}
-.tv-grey{background:var(--grey);color:#ddd;}
-.tvsub{font-size:8px;color:var(--muted);}
-.tvsub.ok{color:var(--green);}
-
-/* TIPS */
+.tv-ard{background:var(--ard);color:#fff;}.tv-zdf{background:var(--zdf);color:#fff;}.tv-mag{background:var(--mag);color:#fff;}.tv-grey{background:var(--grey);color:#ddd;}
+.tvsub{font-size:8px;color:var(--muted);}.tvsub.ok{color:var(--green);}
 .ctips{padding:6px 12px 8px;display:flex;flex-direction:column;gap:0;}
-.trow{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(90,26,106,.3);}
+.trow{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(90,26,106,.3);cursor:pointer;}
 .trow:last-child{border-bottom:none;}
-.twho{display:flex;align-items:center;gap:5px;min-width:95px;}
+.trow.mine{background:rgba(255,45,138,.05);border-radius:6px;padding:6px 6px;margin:0 -6px;}
+.twho{display:flex;align-items:center;gap:5px;min-width:90px;}
 .tdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .tname{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.tfields{display:flex;align-items:center;gap:4px;}
-.ti{width:36px;height:32px;background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:14px;font-weight:600;text-align:center;font-family:'Inter',sans-serif;outline:none;padding:0;-webkit-appearance:none;appearance:none;}
-.ti:focus{border-color:var(--pink2);box-shadow:0 0 6px rgba(255,110,180,.4);}
-.ti.mine{border-color:rgba(255,45,138,.5);}
-.tsep2{color:var(--muted);font-size:13px;}
-.tpts{font-size:11px;font-weight:700;margin-left:4px;min-width:22px;}
+.tval-row{display:flex;align-items:center;gap:4px;flex:1;}
+.tval{min-width:32px;height:28px;background:var(--card2);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--muted);border:1px solid rgba(90,26,106,.4);}
+.tval.filled{color:var(--text);border-color:rgba(255,45,138,.3);}
+.tval.mine-field{border-color:rgba(255,45,138,.6);color:var(--text);}
+.tsep2{color:var(--muted);font-size:12px;}
+.tpts{font-size:11px;font-weight:700;margin-left:4px;}
 .p3{color:#ffb3d9;}.p2{color:#b8f0c0;}.p1{color:#b3d9ff;}.p0{color:var(--muted);}
-.tlock{font-size:11px;margin-left:2px;}
-.tval{width:36px;height:32px;background:var(--card2);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--muted);border:1px solid rgba(90,26,106,.5);}
+.tedit{font-size:10px;color:var(--pink);margin-left:auto;white-space:nowrap;}
+.tlock{font-size:11px;margin-left:auto;color:var(--muted);}
 .no-tips{padding:8px 12px;color:var(--muted);font-size:11px;text-align:center;}
 
-/* Modal */
+/* Overlays */
 .ov{display:none;position:fixed;inset:0;background:rgba(10,0,15,.85);z-index:100;align-items:center;justify-content:center;}
 .ov.open{display:flex;}
 .mod{background:var(--card);border:1px solid var(--pink);border-radius:16px;padding:22px;width:310px;max-width:94vw;box-shadow:0 0 40px rgba(255,45,138,.3);}
@@ -93,6 +79,15 @@ main{padding:14px 16px;}
 .mbtn.g{background:none;border:1px solid var(--border);color:var(--muted);}
 .err{color:var(--pink);font-size:12px;margin-bottom:8px;display:none;}
 
+/* TIP MODAL – big inputs */
+.tip-mod-game{font-size:13px;color:var(--muted);margin-bottom:16px;text-align:center;}
+.tip-mod-inputs{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0;}
+.big-input{width:70px;height:70px;background:var(--card2);border:2px solid var(--pink);border-radius:12px;color:var(--text);font-size:28px;font-weight:700;text-align:center;font-family:'Inter',sans-serif;outline:none;padding:0;-webkit-appearance:none;appearance:none;}
+.big-input:focus{border-color:#ffb3d9;box-shadow:0 0 15px rgba(255,45,138,.4);}
+.big-sep{font-size:28px;font-weight:700;color:var(--muted);}
+.tip-mod-label{font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px;}
+.tip-locked-msg{text-align:center;color:var(--muted);font-size:13px;padding:10px 0;}
+
 .sbt{width:100%;border-collapse:collapse;margin-top:10px;}
 .sbt th{text-align:left;padding:6px 8px;font-size:10px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
 .sbt td{padding:8px;border-bottom:1px solid var(--border);font-size:13px;}
@@ -101,17 +96,14 @@ main{padding:14px 16px;}
 .legend{display:flex;gap:10px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--border);margin-top:14px;}
 .li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted);}
 .ld{width:8px;height:8px;border-radius:2px;}
-
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--pink);border-radius:12px;padding:10px 16px;font-size:13px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
-
 .fairy{position:fixed;pointer-events:none;animation:fly linear infinite;opacity:0.35;z-index:0;}
 @keyframes fly{0%{transform:translateY(100vh);opacity:0;}10%{opacity:.35;}90%{opacity:.35;}100%{transform:translateY(-80px);opacity:0;}}
 </style>
 </head>
 <body>
 <div id="fairies"></div>
-
 <header>
   <div>
     <div class="htitle">🧚‍♀️ WM 2026 <b>Tippspiel</b> ✨</div>
@@ -119,15 +111,12 @@ main{padding:14px 16px;}
   </div>
   <span id="sync">● live</span>
 </header>
-
 <div class="topbar">
   <div id="chips" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;"></div>
   <button class="btn-join" onclick="openJoin()">🧚‍♀️ Mitmachen</button>
   <button class="btn-rank" onclick="openRank()">👑 Rangliste</button>
 </div>
-
 <main id="main"><p style="padding:30px;text-align:center;color:var(--muted)">✨ Lade…</p></main>
-
 <div class="legend">
   <div class="li"><div class="ld" style="background:#ffb3d9"></div>Exakt 3P</div>
   <div class="li"><div class="ld" style="background:#b8f0c0"></div>Diff 2P</div>
@@ -143,9 +132,9 @@ main{padding:14px 16px;}
 <div class="ov" id="joinMod">
   <div class="mod">
     <h3>🧚‍♀️ Mitmachen!</h3>
-    <p>Name + 4-stelliger PIN (zum Schützen deiner Tipps)</p>
+    <p>Name + 4-stelliger PIN (schützt deine Tipps)</p>
     <input type="text" id="jname" placeholder="Dein Name…" maxlength="20" autocomplete="off">
-    <p>PIN:</p>
+    <p>PIN wählen:</p>
     <div class="pinrow">
       <input class="pd" type="tel" maxlength="1" id="j0" inputmode="numeric">
       <input class="pd" type="tel" maxlength="1" id="j1" inputmode="numeric">
@@ -160,7 +149,7 @@ main{padding:14px 16px;}
   </div>
 </div>
 
-<!-- PIN -->
+<!-- PIN LOGIN -->
 <div class="ov" id="pinMod">
   <div class="mod">
     <h3>🔐 PIN eingeben</h3>
@@ -175,6 +164,27 @@ main{padding:14px 16px;}
     <div class="mbtns">
       <button class="mbtn g" onclick="closeOv('pinMod')">Abbrechen</button>
       <button class="mbtn" onclick="doPin()">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- TIP INPUT MODAL -->
+<div class="ov" id="tipMod">
+  <div class="mod">
+    <h3 id="tipModTitle">Tipp eingeben</h3>
+    <div class="tip-mod-game" id="tipModGame"></div>
+    <div id="tipModBody">
+      <div class="tip-mod-label">Dein Tipp:</div>
+      <div class="tip-mod-inputs">
+        <input class="big-input" type="tel" inputmode="numeric" id="tipH" maxlength="2" placeholder="-">
+        <span class="big-sep">:</span>
+        <input class="big-input" type="tel" inputmode="numeric" id="tipA" maxlength="2" placeholder="-">
+      </div>
+      <div class="tip-mod-label" id="tipModHint">Beide Zahlen eingeben, dann Speichern tippen</div>
+    </div>
+    <div class="mbtns" id="tipModBtns">
+      <button class="mbtn g" onclick="closeOv('tipMod')">Abbrechen</button>
+      <button class="mbtn" id="tipSaveBtn" onclick="doSaveTip()">💾 Speichern</button>
     </div>
   </div>
 </div>
@@ -195,11 +205,14 @@ const SB='https://qdpbzbraibsodnxnmbjl.supabase.co/rest/v1';
 const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkcGJ6YnJhaWJzb2RueG5tYmpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNjE2MzIsImV4cCI6MjA5MzgzNzYzMn0.B3iePIhzGm24J6FfYNp_uw4q5Gz5rLK-SHlh2KTD4Bc';
 const H={'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'};
 
-async function GET(path){const r=await fetch(SB+path,{headers:H});return r.json();}
-async function POST(path,body,pref='return=minimal'){
-  const r=await fetch(SB+path,{method:'POST',headers:{...H,'Prefer':pref},body:JSON.stringify(body)});
-  if(pref.includes('representation'))return r.json();
+async function GET(p){const r=await fetch(SB+p,{headers:H});return r.json();}
+async function UPSERT(p,body){
+  const r=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(body)});
   return r.ok;
+}
+async function INSERT_RETURN(p,body){
+  const r=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(body)});
+  return r.json();
 }
 
 const COLORS=['#ff2d8a','#b44dff','#ff6eb4','#d44dff','#ff4da6','#ff80c0','#c040ff','#ff9dce'];
@@ -260,24 +273,14 @@ const GS=[
   {id:'f01',ph:'finale',d:'So 19.07.',t:'21:00',h:'Finalist 1',a:'Finalist 2',tv:'zdf',tc:1,de:0},
 ];
 
-// STATE
-let players=[],results={},tips={};
-let meId=localStorage.getItem('wm_me')||null;
-let pinTarget=null;
+let players=[],results={},tips={},meId=localStorage.getItem('wm_me')||null,pinTarget=null;
+let tipContext=null; // {pid, gid} currently being edited in modal
 
-function setSyn(s){
-  const e=document.getElementById('sync');
-  if(s==='s'){e.textContent='● speichert…';e.style.color='var(--pink)';}
-  else{e.textContent='● live';e.style.color='var(--green)';setTimeout(()=>e.style.color='var(--muted)',2000);}
-}
+function setSyn(s){const e=document.getElementById('sync');if(s==='s'){e.textContent='● speichert…';e.style.color='var(--pink)';}else{e.textContent='● live';e.style.color='var(--green)';setTimeout(()=>e.style.color='var(--muted)',2000);}}
 
 async function loadAll(){
   try{
-    const [pl,re,ti]=await Promise.all([
-      GET('/wm_players?order=created_at'),
-      GET('/wm_results'),
-      GET('/wm_tips')
-    ]);
+    const [pl,re,ti]=await Promise.all([GET('/wm_players?order=created_at'),GET('/wm_results'),GET('/wm_tips')]);
     players=pl||[];
     results={};(re||[]).forEach(r=>{results[r.game_id]={h:r.home_score,a:r.away_score};});
     tips={};(ti||[]).forEach(t=>{if(!tips[t.player_id])tips[t.player_id]={};tips[t.player_id][t.game_id]={h:t.home_score,a:t.away_score};});
@@ -331,72 +334,47 @@ function renderGames(){
 function buildCard(g){
   const res=results[g.id]||{};
   const lk=locked(g.id);
-  const tvLabels={ard:['ARD','tv-ard'],zdf:['ZDF','tv-zdf'],mag:['Magenta','tv-mag'],grey:['?','tv-grey']};
-  const [tvl,tvc]=tvLabels[g.tv]||['?','tv-grey'];
+  const tvMap={ard:['ARD','tv-ard'],zdf:['ZDF','tv-zdf'],mag:['Magenta','tv-mag'],grey:['?','tv-grey']};
+  const [tvl,tvc]=tvMap[g.tv]||['?','tv-grey'];
 
-  const card=document.createElement('div');
-  card.className='card'+(g.de?' de':'');
+  const card=document.createElement('div');card.className='card'+(g.de?' de':'');
 
-  // TOP ROW
+  // TOP
   const top=document.createElement('div');top.className='ctop';
-
-  // Date
   const cd=document.createElement('div');cd.className='cdate';
   cd.innerHTML=`<div class="d">${g.d}</div><div class="t">${g.t}${lk?' 🔒':''}</div>`;
   top.appendChild(cd);
-
-  // Home team
   const ht=document.createElement('div');ht.className='cteam';
   ht.innerHTML=`<span class="cf">${fl(g.h)}</span><span class="cn">${g.h}</span>`;
   top.appendChild(ht);
 
-  // Score
+  // Score inputs (for result entry - always editable)
   const sc=document.createElement('div');sc.className='cscore';
   const hv=res.h!==null&&res.h!==undefined?res.h:'';
   const av=res.a!==null&&res.a!==undefined?res.a:'';
-  sc.innerHTML=`
-    <div class="srow">
-      <input class="si" id="r${g.id}h" type="number" min="0" max="99" value="${hv}" placeholder="-">
-      <span class="ssep">:</span>
-      <input class="si" id="r${g.id}a" type="number" min="0" max="99" value="${av}" placeholder="-">
-    </div>
-    <div class="slbl">Ergebnis</div>`;
+  sc.innerHTML=`<div class="srow"><input class="si" id="r${g.id}h" type="tel" inputmode="numeric" maxlength="2" value="${hv}" placeholder="-"><span class="ssep">:</span><input class="si" id="r${g.id}a" type="tel" inputmode="numeric" maxlength="2" value="${av}" placeholder="-"></div><div class="slbl">Ergebnis</div>`;
   top.appendChild(sc);
 
-  // Away team
   const at=document.createElement('div');at.className='cteam r';
   at.innerHTML=`<span class="cn">${g.a}</span><span class="cf">${fl(g.a)}</span>`;
   top.appendChild(at);
-
-  // TV
   const tv=document.createElement('div');tv.className='ctv';
   const tvok=g.tc&&g.tv!=='grey';
   tv.innerHTML=`<span class="tvb ${tvc}">${tvl}</span><span class="tvsub${tvok?' ok':''}">${g.tv==='grey'?'offen':g.tc?'✓ best.':'wahrsch.'}</span>`;
   top.appendChild(tv);
-
   card.appendChild(top);
 
-  // Result save - use touchend + change + blur all pointing to same debounced fn
-  let rTimer=null;
-  function saveRes(){
-    clearTimeout(rTimer);
-    rTimer=setTimeout(async()=>{
+  // Result save on blur (result fields are less critical, blur works fine here)
+  sc.querySelectorAll('.si').forEach(inp=>{
+    inp.addEventListener('blur',()=>{
       const hEl=document.getElementById('r'+g.id+'h');
       const aEl=document.getElementById('r'+g.id+'a');
-      if(!hEl||!aEl)return;
-      const hVal=hEl.value===''?null:parseInt(hEl.value);
-      const aVal=aEl.value===''?null:parseInt(aEl.value);
+      const hVal=hEl&&hEl.value!==''?parseInt(hEl.value):null;
+      const aVal=aEl&&aEl.value!==''?parseInt(aEl.value):null;
       results[g.id]={h:hVal,a:aVal};
       setSyn('s');
-      const ok=await POST('/wm_results',{game_id:g.id,home_score:hVal,away_score:aVal},'resolution=merge-duplicates,return=minimal');
-      setSyn('ok');
-      if(ok)refreshTipPoints(g.id);
-    },300);
-  }
-  sc.querySelectorAll('.si').forEach(inp=>{
-    inp.addEventListener('change',saveRes);
-    inp.addEventListener('blur',saveRes);
-    inp.addEventListener('input',saveRes);
+      UPSERT('/wm_results',{game_id:g.id,home_score:hVal,away_score:aVal}).then(ok=>{setSyn('ok');if(ok)renderGames();});
+    });
   });
 
   // TIPS
@@ -409,71 +387,32 @@ function buildCard(g){
       const isMine=meId===p.id;
       const canEdit=isMine&&!lk;
       const p3=calcPts(g.id,p.id);
-      const ptsStr=p3!==null?`<span class="tpts ${p3===3?'p3':p3===2?'p2':p3===1?'p1':'p0'}">${p3}P</span>`:'';
+      const hVal=t.h!==null&&t.h!==undefined?String(t.h):'';
+      const aVal=t.a!==null&&t.a!==undefined?String(t.a):'';
 
-      const tr=document.createElement('div');tr.className='trow';
+      const tr=document.createElement('div');
+      tr.className='trow'+(isMine?' mine':'');
 
-      // Who
       const who=document.createElement('div');who.className='twho';
       who.innerHTML=`<div class="tdot" style="background:${p.color}"></div><span class="tname">${p.name}</span>`;
       tr.appendChild(who);
 
-      // Fields
-      const tf=document.createElement('div');tf.className='tfields';
-      const th_v=t.h!==null&&t.h!==undefined?t.h:'';
-      const ta_v=t.a!==null&&t.a!==undefined?t.a:'';
+      const vrow=document.createElement('div');vrow.className='tval-row';
+      const dh=document.createElement('span');dh.className='tval'+(hVal!==''?' filled':'')+(isMine?' mine-field':'');dh.textContent=hVal!==''?hVal:'-';
+      const sp=document.createElement('span');sp.className='tsep2';sp.textContent=':';
+      const da=document.createElement('span');da.className='tval'+(aVal!==''?' filled':'')+(isMine?' mine-field':'');da.textContent=aVal!==''?aVal:'-';
+      vrow.appendChild(dh);vrow.appendChild(sp);vrow.appendChild(da);
+      tr.appendChild(vrow);
+
+      if(p3!==null){const pts=document.createElement('span');pts.className='tpts '+(p3===3?'p3':p3===2?'p2':p3===1?'p1':'p0');pts.textContent=p3+'P';tr.appendChild(pts);}
 
       if(canEdit){
-        // Editable inputs
-        const ih=document.createElement('input');
-        ih.type='number';ih.min=0;ih.max=99;
-        ih.className='ti mine';ih.value=th_v;ih.placeholder='-';
-        ih.id='t'+p.id+g.id+'h';
-
-        const sp=document.createElement('span');sp.className='tsep2';sp.textContent=':';
-
-        const ia=document.createElement('input');
-        ia.type='number';ia.min=0;ia.max=99;
-        ia.className='ti mine';ia.value=ta_v;ia.placeholder='-';
-        ia.id='t'+p.id+g.id+'a';
-
-        tf.appendChild(ih);tf.appendChild(sp);tf.appendChild(ia);
-
-        // Save function reads both fields by ID
-        let tTimer=null;
-        function saveTip(){
-          clearTimeout(tTimer);
-          tTimer=setTimeout(async()=>{
-            const hEl=document.getElementById('t'+p.id+g.id+'h');
-            const aEl=document.getElementById('t'+p.id+g.id+'a');
-            if(!hEl||!aEl)return;
-            const hVal=hEl.value===''?null:parseInt(hEl.value);
-            const aVal=aEl.value===''?null:parseInt(aEl.value);
-            if(!tips[p.id])tips[p.id]={};
-            tips[p.id][g.id]={h:hVal,a:aVal};
-            setSyn('s');
-            const ok=await POST('/wm_tips',{player_id:p.id,game_id:g.id,home_score:hVal,away_score:aVal},'resolution=merge-duplicates,return=minimal');
-            setSyn('ok');
-            if(ok)toast('✓ gespeichert');
-          },500);
-        }
-
-        ih.addEventListener('change',saveTip);
-        ih.addEventListener('blur',saveTip);
-        ia.addEventListener('change',saveTip);
-        ia.addEventListener('blur',saveTip);
-
-      } else {
-        // Read-only display
-        const dh=document.createElement('span');dh.className='tval';dh.textContent=th_v!==''?th_v:'-';
-        const sp=document.createElement('span');sp.className='tsep2';sp.textContent=':';
-        const da=document.createElement('span');da.className='tval';da.textContent=ta_v!==''?ta_v:'-';
-        tf.appendChild(dh);tf.appendChild(sp);tf.appendChild(da);
+        const edit=document.createElement('span');edit.className='tedit';edit.textContent='✏️ Tippen';tr.appendChild(edit);
+        tr.onclick=()=>openTipModal(p.id,g.id,g.h,g.a,hVal,aVal);
+      } else if(lk&&isMine){
+        const lkEl=document.createElement('span');lkEl.className='tlock';lkEl.textContent='🔒';tr.appendChild(lkEl);
       }
 
-      tr.appendChild(tf);
-      if(ptsStr){const ps=document.createElement('span');ps.innerHTML=ptsStr;tr.appendChild(ps);}
-      if(lk&&isMine){const lkEl=document.createElement('span');lkEl.className='tlock';lkEl.textContent='🔒';tr.appendChild(lkEl);}
       td.appendChild(tr);
     });
     card.appendChild(td);
@@ -481,27 +420,49 @@ function buildCard(g){
   return card;
 }
 
-function refreshTipPoints(gid){
-  // Re-render just the points labels without full re-render
-  players.forEach(p=>{
-    const p3=calcPts(gid,p.id);
-    // just do full render on result change - acceptable
-  });
-  // lightweight: just rebuild this one card
-  const oldCard=document.querySelector('#main .card[data-gid="'+gid+'"]');
-  // skip for now - full render handled by loadAll interval
+// TIP MODAL
+function openTipModal(pid,gid,home,away,curH,curA){
+  tipContext={pid,gid};
+  const p=players.find(x=>x.id===pid);
+  document.getElementById('tipModTitle').textContent='✏️ Tipp für '+( p?p.name:'');
+  document.getElementById('tipModGame').textContent=home+' – '+away;
+  document.getElementById('tipH').value=curH;
+  document.getElementById('tipA').value=curA;
+  document.getElementById('tipMod').classList.add('open');
+  setTimeout(()=>document.getElementById('tipH').focus(),200);
+}
+
+async function doSaveTip(){
+  if(!tipContext)return;
+  const hEl=document.getElementById('tipH');
+  const aEl=document.getElementById('tipA');
+  const hStr=hEl.value.trim();
+  const aStr=aEl.value.trim();
+  const hVal=hStr===''?null:parseInt(hStr,10);
+  const aVal=aStr===''?null:parseInt(aStr,10);
+  
+  const btn=document.getElementById('tipSaveBtn');
+  btn.textContent='…';btn.disabled=true;
+  setSyn('s');
+  
+  const ok=await UPSERT('/wm_tips',{player_id:tipContext.pid,game_id:tipContext.gid,home_score:hVal,away_score:aVal});
+  setSyn('ok');
+  btn.textContent='💾 Speichern';btn.disabled=false;
+  
+  if(ok){
+    if(!tips[tipContext.pid])tips[tipContext.pid]={};
+    tips[tipContext.pid][tipContext.gid]={h:hVal,a:aVal};
+    closeOv('tipMod');
+    toast('✓ Tipp gespeichert!');
+    renderGames();
+  } else {
+    toast('Fehler beim Speichern');
+  }
 }
 
 // PIN auto-advance
-['j0','j1','j2','j3'].forEach((id,i)=>{
-  const el=document.getElementById(id);
-  el.addEventListener('input',function(){if(this.value.length===1&&i<3)document.getElementById('j'+(i+1)).focus();});
-});
-['pp0','pp1','pp2','pp3'].forEach((id,i)=>{
-  const el=document.getElementById(id);
-  el.addEventListener('input',function(){if(this.value.length===1&&i<3)document.getElementById('pp'+(i+1)).focus();});
-});
-
+['j0','j1','j2','j3'].forEach((id,i)=>{document.getElementById(id).addEventListener('input',function(){if(this.value.length===1&&i<3)document.getElementById('j'+(i+1)).focus();});});
+['pp0','pp1','pp2','pp3'].forEach((id,i)=>{document.getElementById(id).addEventListener('input',function(){if(this.value.length===1&&i<3)document.getElementById('pp'+(i+1)).focus();});});
 function getPin(pre){return [0,1,2,3].map(i=>document.getElementById(pre+i).value).join('');}
 
 function openJoin(){
@@ -520,15 +481,10 @@ async function doJoin(){
   const color=COLORS[players.length%COLORS.length];
   setSyn('s');
   try{
-    const arr=await POST('/wm_players',{name,color,pin_hash:pinHash},'return=representation');
+    const arr=await INSERT_RETURN('/wm_players',{name,color,pin_hash:pinHash});
     const p=Array.isArray(arr)?arr[0]:arr;
-    players.push(p);
-    meId=p.id;
-    localStorage.setItem('wm_me',p.id);
-    setSyn('ok');
-    closeOv('joinMod');
-    render();
-    toast('🧚‍♀️ '+name+' ist dabei!');
+    players.push(p);meId=p.id;localStorage.setItem('wm_me',p.id);
+    setSyn('ok');closeOv('joinMod');render();toast('🧚‍♀️ '+name+' ist dabei!');
   }catch(e){setSyn('ok');toast('Fehler – bitte nochmal');}
 }
 
@@ -547,11 +503,8 @@ function doPin(){
   const pin=getPin('pp');
   const p=players.find(x=>x.id===pinTarget);if(!p)return;
   if(p.pin_hash===btoa(pin+'wm2026')){
-    meId=pinTarget;
-    localStorage.setItem('wm_me',meId);
-    closeOv('pinMod');
-    render();
-    toast('✨ Willkommen '+p.name+'!');
+    meId=pinTarget;localStorage.setItem('wm_me',meId);
+    closeOv('pinMod');render();toast('✨ Willkommen '+p.name+'!');
   } else {
     document.getElementById('perr').style.display='block';
     [0,1,2,3].forEach(i=>document.getElementById('pp'+i).value='');
@@ -581,14 +534,14 @@ document.querySelectorAll('.ov').forEach(el=>el.addEventListener('click',e=>{if(
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'){
     if(document.getElementById('joinMod').classList.contains('open'))doJoin();
-    if(document.getElementById('pinMod').classList.contains('open'))doPin();
+    else if(document.getElementById('pinMod').classList.contains('open'))doPin();
+    else if(document.getElementById('tipMod').classList.contains('open'))doSaveTip();
   }
-  if(e.key==='Escape')['joinMod','pinMod','rankMod'].forEach(closeOv);
+  if(e.key==='Escape')['joinMod','pinMod','tipMod','rankMod'].forEach(closeOv);
 });
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 
-// Fairies
 const fe=['🧚‍♀️','✨','💫','🌸','💕','⭐'];
 function fairy(){const e=document.createElement('div');e.className='fairy';e.textContent=fe[Math.floor(Math.random()*fe.length)];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(12+Math.random()*15)+'s';e.style.fontSize=(10+Math.random()*12)+'px';document.getElementById('fairies').appendChild(e);setTimeout(()=>e.remove(),27000);}
 setInterval(fairy,3000);[0,1,2].forEach(i=>setTimeout(fairy,i*600));
