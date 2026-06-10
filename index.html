@@ -388,9 +388,16 @@ function buildCard(game){
   card.appendChild(top);
 
   // Ergebnis save on blur
+  let resTimer=null;
   scoreDiv.querySelectorAll('.si').forEach(inp=>{
-    inp.addEventListener('change',()=>saveResult(game.id));
-    inp.addEventListener('blur',()=>saveResult(game.id));
+    inp.addEventListener('input',()=>{
+      clearTimeout(resTimer);
+      resTimer=setTimeout(()=>saveResult(game.id),800);
+    });
+    inp.addEventListener('blur',()=>{
+      clearTimeout(resTimer);
+      saveResult(game.id);
+    });
   });
 
   // TIPS
@@ -432,9 +439,16 @@ function buildCard(game){
         ${locked&&isMine?'<span class="lock-icon">🔒</span>':''}`;
 
       if(canEdit){
+        let tipTimer=null;
         tr.querySelectorAll('.tip-input').forEach(inp=>{
-          inp.addEventListener('change',()=>saveTip(p.id,game.id));
-          inp.addEventListener('blur',()=>saveTip(p.id,game.id));
+          inp.addEventListener('input',()=>{
+            clearTimeout(tipTimer);
+            tipTimer=setTimeout(()=>saveTip(p.id,game.id),800);
+          });
+          inp.addEventListener('blur',()=>{
+            clearTimeout(tipTimer);
+            saveTip(p.id,game.id);
+          });
         });
       }
       tipsDiv.appendChild(tr);
