@@ -207,8 +207,15 @@ const H={'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/js
 
 async function GET(p){const r=await fetch(SB+p,{headers:H});return r.json();}
 async function UPSERT(p,body){
-  const r=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(body)});
-  return r.ok;
+  try{
+    let filter='';
+    if(p.includes('wm_tips'))filter='?player_id=eq.'+body.player_id+'&game_id=eq.'+body.game_id;
+    if(p.includes('wm_results'))filter='?game_id=eq.'+body.game_id;
+    const patch=await fetch(SB+p+filter,{method:'PATCH',headers:{...H,'Prefer':'return=minimal'},body:JSON.stringify(body)});
+    if(patch.ok)return true;
+    const ins=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'return=minimal'},body:JSON.stringify(body)});
+    return ins.ok;
+  }catch(e){return false;}
 }
 async function INSERT_RETURN(p,body){
   const r=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(body)});
