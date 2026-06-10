@@ -360,10 +360,10 @@ function buildCard(game){
       const t=(tips[p.id]||{})[game.id]||{};
       const pts=calcPoints(game.id,p.id);
       const ptsHtml=pts!==null?`<span class="tip-pts ${pts===3?'pts3':pts===2?'pts2':pts===1?'pts1':'pts0'}">${pts}P</span>`:'';
-      const isActive=!activePlayer||activePlayer===p.id;
+      
       const tr=document.createElement('div');
       tr.className='tip-row'+(activePlayer===p.id?' tip-active':'');
-      tr.style.opacity=isActive?'1':'0.4';
+      
       tr.innerHTML=`
         <div class="tip-player">
           <div class="tip-dot" style="background:${p.color}"></div>
@@ -372,11 +372,11 @@ function buildCard(game){
         <div class="tip-inputs">
           <input class="tip-input" type="text" inputmode="numeric" pattern="[0-9]*" value="${t.home??''}" placeholder="-"
             onchange="saveTip('${p.id}','${game.id}','home',this.value)"
-            onfocus="setActive('${p.id}')">
+            >
           <span class="tip-sep">:</span>
           <input class="tip-input" type="text" inputmode="numeric" pattern="[0-9]*" value="${t.away??''}" placeholder="-"
             onchange="saveTip('${p.id}','${game.id}','away',this.value)"
-            onfocus="setActive('${p.id}')">
+            >
         </div>
         ${ptsHtml}`;
       tipsDiv.appendChild(tr);
