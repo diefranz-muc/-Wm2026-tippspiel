@@ -330,9 +330,9 @@ function buildCard(game){
   const scoreDiv=document.createElement('div');scoreDiv.className='card-score';
   scoreDiv.innerHTML=`
     <div class="score-row">
-      <input class="score-input" type="number" min="0" max="99" value="${result.home??''}" placeholder="-" onchange="saveResult('${game.id}','home',this.value)">
+      <input class="score-input" type="text" inputmode="numeric" pattern="[0-9]*" value="${result.home??''}" placeholder="-" onchange="saveResult('${game.id}','home',this.value)">
       <span class="score-sep">:</span>
-      <input class="score-input" type="number" min="0" max="99" value="${result.away??''}" placeholder="-" onchange="saveResult('${game.id}','away',this.value)">
+      <input class="score-input" type="text" inputmode="numeric" pattern="[0-9]*" value="${result.away??''}" placeholder="-" onchange="saveResult('${game.id}','away',this.value)">
     </div>
     <div class="score-label">Ergebnis</div>`;
   top.appendChild(scoreDiv);
@@ -370,11 +370,11 @@ function buildCard(game){
           <span class="tip-name">${p.name}</span>
         </div>
         <div class="tip-inputs">
-          <input class="tip-input" type="number" min="0" max="99" value="${t.home??''}" placeholder="-"
+          <input class="tip-input" type="text" inputmode="numeric" pattern="[0-9]*" value="${t.home??''}" placeholder="-"
             onchange="saveTip('${p.id}','${game.id}','home',this.value)"
             onfocus="setActive('${p.id}')">
           <span class="tip-sep">:</span>
-          <input class="tip-input" type="number" min="0" max="99" value="${t.away??''}" placeholder="-"
+          <input class="tip-input" type="text" inputmode="numeric" pattern="[0-9]*" value="${t.away??''}" placeholder="-"
             onchange="saveTip('${p.id}','${game.id}','away',this.value)"
             onfocus="setActive('${p.id}')">
         </div>
