@@ -208,13 +208,20 @@ const H={'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/js
 async function GET(p){const r=await fetch(SB+p,{headers:H});return r.json();}
 async function UPSERT(p,body){
   try{
-    // Always DELETE then INSERT to avoid any conflict issues
-    let delFilter='';
-    if(p.includes('wm_tips'))delFilter='?player_id=eq.'+body.player_id+'&game_id=eq.'+body.game_id;
-    if(p.includes('wm_results'))delFilter='?game_id=eq.'+body.game_id;
-    await fetch(SB+p+delFilter,{method:'DELETE',headers:H});
-    const ins=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'return=minimal'},body:JSON.stringify(body)});
-    return ins.ok;
+    let fn, args;
+    if(p.includes('wm_tips')){
+      fn='upsert_tip';
+      args={p_player_id:body.player_id,p_game_id:body.game_id,p_home:body.home_score,p_away:body.away_score};
+    } else {
+      fn='upsert_result';
+      args={p_game_id:body.game_id,p_home:body.home_score,p_away:body.away_score};
+    }
+    const r=await fetch(SB+'/rpc/'+fn,{
+      method:'POST',
+      headers:H,
+      body:JSON.stringify(args)
+    });
+    return r.ok;
   }catch(e){return false;}
 }
 async function INSERT_RETURN(p,body){
