@@ -111,6 +111,12 @@ main{padding:14px 16px;}
   </div>
   <span id="sync">● live</span>
 </header>
+
+<!-- COUNTDOWN -->
+<div id="countdown-banner" style="background:linear-gradient(135deg,#3d0050,#1a0a1e);border-bottom:2px solid var(--pink);padding:14px 16px;text-align:center;position:relative;z-index:2;display:none;">
+  <div id="countdown-text" style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:var(--text);text-shadow:0 0 20px rgba(255,45,138,.6);"></div>
+  <div style="font-size:11px;color:var(--muted);margin-top:4px;">🧚‍♀️ Tipps jetzt noch schnell abgeben!</div>
+</div>
 <div class="topbar">
   <div id="chips" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;"></div>
   <button class="btn-join" onclick="openJoin()">🧚‍♀️ Mitmachen</button>
@@ -562,6 +568,36 @@ setInterval(fairy,3000);[0,1,2].forEach(i=>setTimeout(fairy,i*600));
 
 setInterval(loadAll,30000);
 loadAll();
+
+// COUNTDOWN
+(function(){
+  const banner=document.getElementById('countdown-banner');
+  const text=document.getElementById('countdown-text');
+  const kickoff=new Date('2026-06-11T19:00:00Z'); // 21:00 MESZ
+  const hide=new Date('2026-06-11T21:00:00Z');    // 23:00 MESZ
+
+  function update(){
+    const now=new Date();
+    if(now>=hide){banner.style.display='none';return;}
+    if(now>=kickoff){
+      banner.style.display='block';
+      text.innerHTML='🩷 ANPFIFF! LOS GEEEEHTS!!! ⚽ Die Kugel rollt – wer hat richtig getippt?! 🩷';
+      text.style.color='#ff2d8a';
+      text.style.fontSize='1.5rem';
+      return;
+    }
+    banner.style.display='block';
+    const diff=kickoff-now;
+    const h=Math.floor(diff/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    const pad=n=>String(n).padStart(2,'0');
+    text.innerHTML='⏱️ Noch <span style="color:#ff2d8a;font-size:1.6rem;">'+pad(h)+':'+pad(m)+':'+pad(s)+'</span> bis zum Anpfiff – Tipps jetzt abgeben!';
+  }
+  update();
+  setInterval(update,1000);
+})();
+
 </script>
 </body>
 </html>
