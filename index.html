@@ -116,8 +116,6 @@ main{padding:14px 16px;}
   <button class="btn-join" onclick="openJoin()">🧚‍♀️ Mitmachen</button>
   <button class="btn-rank" onclick="openRank()">👑 Rangliste</button>
 </div>
-<div id="debugbox" style="display:none;position:fixed;bottom:60px;left:8px;right:8px;background:#000;color:#0f0;font-size:10px;padding:8px;border-radius:8px;z-index:300;max-height:200px;overflow-y:auto;border:1px solid #0f0;"></div>
-<button onclick="document.getElementById('debugbox').style.display=document.getElementById('debugbox').style.display==='none'?'block':'none'" style="position:fixed;bottom:20px;right:70px;z-index:301;background:#333;color:#0f0;border:1px solid #0f0;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">🐛 Debug</button>
 <main id="main"><p style="padding:30px;text-align:center;color:var(--muted)">✨ Lade…</p></main>
 <div class="legend">
   <div class="li"><div class="ld" style="background:#ffb3d9"></div>Exakt 3P</div>
@@ -223,10 +221,8 @@ async function UPSERT(p,body){
       headers:H,
       body:JSON.stringify(args)
     });
-    const txt=await r.text();
-    debugLog('UPSERT '+fn+' status:'+r.status+' body:'+txt.substring(0,100));
     return r.ok;
-  }catch(e){debugLog('UPSERT ERROR: '+e.message);return false;}
+  }catch(e){return false;}
 }
 async function INSERT_RETURN(p,body){
   const r=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(body)});
@@ -558,14 +554,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape')['joinMod','pinMod','tipMod','rankMod'].forEach(closeOv);
 });
 
-function debugLog(msg){
-  const box=document.getElementById('debugbox');
-  if(!box)return;
-  const line=document.createElement('div');
-  line.textContent=new Date().toISOString().substr(11,8)+' '+msg;
-  box.appendChild(line);
-  box.scrollTop=box.scrollHeight;
-}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 
 const fe=['🧚‍♀️','✨','💫','🌸','💕','⭐'];
