@@ -208,11 +208,11 @@ const H={'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/js
 async function GET(p){const r=await fetch(SB+p,{headers:H});return r.json();}
 async function UPSERT(p,body){
   try{
-    let filter='';
-    if(p.includes('wm_tips'))filter='?player_id=eq.'+body.player_id+'&game_id=eq.'+body.game_id;
-    if(p.includes('wm_results'))filter='?game_id=eq.'+body.game_id;
-    const patch=await fetch(SB+p+filter,{method:'PATCH',headers:{...H,'Prefer':'return=minimal'},body:JSON.stringify(body)});
-    if(patch.ok)return true;
+    // Always DELETE then INSERT to avoid any conflict issues
+    let delFilter='';
+    if(p.includes('wm_tips'))delFilter='?player_id=eq.'+body.player_id+'&game_id=eq.'+body.game_id;
+    if(p.includes('wm_results'))delFilter='?game_id=eq.'+body.game_id;
+    await fetch(SB+p+delFilter,{method:'DELETE',headers:H});
     const ins=await fetch(SB+p,{method:'POST',headers:{...H,'Prefer':'return=minimal'},body:JSON.stringify(body)});
     return ins.ok;
   }catch(e){return false;}
